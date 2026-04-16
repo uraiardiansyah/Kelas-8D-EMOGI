@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Papan Emoji Kelas</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f0f8ff;
+    }
+    h1 {
+      color: #333;
+    }
+    .emoji {
+      font-size: 60px;
+      cursor: pointer;
+      margin: 15px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>😊 Papan Emoji Kelas</h1>
+<p>Masukkan nama dan pilih perasaanmu hari ini</p>
+
+<input type="text" id="nama" placeholder="Nama kamu"><br><br>
+
+<div>
+  <span class="emoji" onclick="kirim('Senang')">😊</span>
+  <span class="emoji" onclick="kirim('Sedih')">😢</span>
+  <span class="emoji" onclick="kirim('Marah')">😡</span>
+  <span class="emoji" onclick="kirim('Lelah')">😴</span>
+  <span class="emoji" onclick="kirim('Semangat')">😍</span>
+  <span class="emoji" onclick="kirim('Bingung')">😕</span>
+</div>
+
+<p id="hasil"></p>
+
+<script>
+function kirim(perasaan) {
+  let nama = document.getElementById("nama").value;
+  if(nama === "") {
+    alert("Isi nama dulu!");
+    return;
+  }
+
+  let data = {
+    nama: nama,
+    perasaan: perasaan,
+    waktu: new Date().toLocaleString()
+  };
+
+  let lama = JSON.parse(localStorage.getItem("data")) || [];
+  lama.push(data);
+  localStorage.setItem("data", JSON.stringify(lama));
+
+  document.getElementById("hasil").innerHTML =
+    "Terima kasih, " + nama + " 😊";
+}
+</script>
+
+</body>
+</html>
